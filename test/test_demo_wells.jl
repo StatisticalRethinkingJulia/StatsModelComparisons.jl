@@ -1,4 +1,4 @@
-using ParetoSmoothedImportanceSampling
+using ModelComparisons
 using StanSample, StatsFuns
 using Printf
 using JSON

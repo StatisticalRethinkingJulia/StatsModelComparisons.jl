@@ -1,6 +1,6 @@
 name = "ModelComparisons"
 uuid = "854dedd9-9477-4a25-907d-7fd989bfdd01"
-authors = ["@alvaro1101, Rob J Goedman, Chris Fisher]
+authors = ["@alvaro1101, Rob J Goedman, Chris Fisher"]
 version = "1.0.0"
 
 [deps]
