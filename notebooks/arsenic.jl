@@ -9,7 +9,7 @@ using Pkg, DrWatson
 
 # ╔═╡ 686dac30-5ebb-11eb-00f1-434980dba906
 begin
-	@quickactivate "ParetoSmoothedImportanceSamplng"
+	@quickactivate "StatsModelComparisons"
 	using StatsModelComparisons
 	using StanSample, StatsFuns, StatsPlots
 	using DataFrames, CSV, JSON
@@ -17,7 +17,7 @@ end
 
 # ╔═╡ 923212a8-630d-11eb-390f-75d21be80011
 begin
-	ProjDir = joinpath(psis_path, "..", "examples", "arsenic")
+	ProjDir = joinpath(mc_path, "..", "examples", "arsenic")
 	include(joinpath(ProjDir, "cvit.jl"))
 end;
 

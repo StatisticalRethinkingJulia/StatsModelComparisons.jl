@@ -9,7 +9,7 @@ using Pkg, DrWatson
 
 # ╔═╡ d20c24f8-5ec2-11eb-3d45-d97fedebee8e
 begin
-	@quickactivate "ParetoSmoothedImportanceSamplng"
+	@quickactivate "StatsModelComparisons"
 	using StatsModelComparisons
 	using StanSample, StatsFuns, StatsPlots
 	using DataFrames, CSV
@@ -17,7 +17,7 @@ end
 
 # ╔═╡ e3552750-5e9f-11eb-324b-8df36d671c79
 begin
-	ProjDir = joinpath(psis_path, "..", "examples", "roaches")
+	ProjDir = joinpath(mc_path, "..", "examples", "roaches")
 	df = CSV.read(joinpath(ProjDir, "roachdata.csv"), DataFrame)
 	df.roach1 = df.roach1 / 100
 end;
