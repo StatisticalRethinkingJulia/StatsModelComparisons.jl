@@ -1,4 +1,3 @@
-
 """
     dic(loglike::AbstractVector{<:Real})
 
