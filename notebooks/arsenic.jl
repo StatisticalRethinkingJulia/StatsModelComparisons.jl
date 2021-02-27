@@ -10,7 +10,7 @@ using Pkg, DrWatson
 # ╔═╡ 686dac30-5ebb-11eb-00f1-434980dba906
 begin
 	@quickactivate "ParetoSmoothedImportanceSamplng"
-	using ParetoSmoothedImportanceSampling
+	using ModelComparisons
 	using StanSample, StatsFuns, StatsPlots
 	using DataFrames, CSV, JSON
 end

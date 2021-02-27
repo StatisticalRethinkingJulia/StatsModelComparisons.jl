@@ -1,4 +1,4 @@
-using ParetoSmoothedImportanceSampling, StanSample
+using ModelComparisons, StanSample
 using CSV, Printf, StatsPlots
 
 ProjDir = @__DIR__

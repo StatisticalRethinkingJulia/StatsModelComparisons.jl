@@ -1,4 +1,4 @@
-using ParetoSmoothedImportanceSampling, StanSample
+using ModelComparisons, StanSample
 using StatsFuns, RDatasets
 
 df = RDatasets.dataset("datasets", "cars")
