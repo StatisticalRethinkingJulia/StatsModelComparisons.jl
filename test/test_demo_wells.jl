@@ -1,4 +1,4 @@
-using ModelComparisons
+using StatsModelComparisons
 using StanSample, StatsFuns
 using Printf
 using JSON

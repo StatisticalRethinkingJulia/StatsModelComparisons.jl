@@ -1,4 +1,4 @@
-using ModelComparisons, StanSample
+using StatsModelComparisons, StanSample
 using StatsFuns, RDatasets
 
 df = RDatasets.dataset("datasets", "cars")

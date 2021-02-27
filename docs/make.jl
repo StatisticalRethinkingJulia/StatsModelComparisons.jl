@@ -1,10 +1,10 @@
-using Documenter, ModelComparisons
+using Documenter, StatsModelComparisons
 
 makedocs(
-    modules = [ModelComparisons],
+    modules = [StatsModelComparisons],
     format = Documenter.HTML(; prettyurls = get(ENV, "CI", nothing) == "true"),
     authors = "Rob J Goedman",
-    sitename = "ModelComparisons.jl",
+    sitename = "StatsModelComparisons.jl",
     pages = Any["index.md"]
     # strict = true,
     # clean = true,
@@ -12,6 +12,6 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/goedman/ModelComparisons.jl.git",
+    repo = "github.com/goedman/StatsModelComparisons.jl.git",
     push_preview = true
 )

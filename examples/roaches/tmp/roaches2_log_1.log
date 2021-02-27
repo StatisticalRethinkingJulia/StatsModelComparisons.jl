@@ -24,12 +24,12 @@ method = sample (Default)
         stepsize_jitter = 1
 id = 2
 data
-  file = /Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2_data_2.R
+  file = /Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2_data_2.R
 init = 2 (Default)
 random
   seed = 3952082489 (Default)
 output
-  file = /Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2_chain_2.csv
+  file = /Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2_chain_2.csv
   diagnostic_file =  (Default)
 method = sample (Default)
   refresh = 100 (Default)
@@ -103,13 +103,13 @@ id = 4
     algorithm = hmc (Default)
 data
       hmc
-  file = /Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2_data_4.R
+  file = /Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2_data_4.R
         engine = nuts (Default)
 id = 1
 init = 2 (Default)
 data
 random
-  file = /Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2_data_1.R
+  file = /Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2_data_1.R
           nuts
 init = 2 (Default)
   seed = 3952082490 (Default)
@@ -117,7 +117,7 @@ random
 output
             max_depth = 10 (Default)
   seed = 3952082490 (Default)
-  file = /Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2_chain_4.csv
+  file = /Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2_chain_4.csv
         metric = diag_e (Default)
   diagnostic_file =  (Default)
         metric_file =  (Default)
@@ -126,7 +126,7 @@ output
   sig_figs = -1 (Default)
 output
   profile_file = profile.csv (Default)
-  file = /Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2_chain_1.csv
+  file = /Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2_chain_1.csv
 num_threads = 4
   diagnostic_file =  (Default)
 
@@ -135,7 +135,7 @@ num_threads = 4
 id = 3
 data
   sig_figs = -1 (Default)
-  file = /Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2_data_3.R
+  file = /Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2_data_3.R
   profile_file = profile.csv (Default)
 init = 2 (Default)
 num_threads = 4
@@ -143,7 +143,7 @@ random
 
   seed = 3952082490 (Default)
 output
-  file = /Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2_chain_3.csv
+  file = /Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2_chain_3.csv
   diagnostic_file =  (Default)
   refresh = 100 (Default)
   sig_figs = -1 (Default)
@@ -152,7 +152,7 @@ num_threads = 4
 
 Rejecting initial value:
   Error evaluating the log probability at the initial value.
-Exception: neg_binomial_2_log_lpmf: Precision parameter is -0.731162, but must be positive finite! (in '/Users/rob/.julia/dev/ModelComparisons/examples/roaches/tmp/roaches2.stan', line 28, column 2 to column 35)
+Exception: neg_binomial_2_log_lpmf: Precision parameter is -0.731162, but must be positive finite! (in '/Users/rob/.julia/dev/StatsModelComparisons/examples/roaches/tmp/roaches2.stan', line 28, column 2 to column 35)
 
 Gradient evaluation took 0.000174 seconds
 1000 transitions using 10 leapfrog steps per transition would take 1.74 seconds.

@@ -1,4 +1,4 @@
-using ModelComparisons, StanSample
+using StatsModelComparisons, StanSample
 using CSV, Printf, StatsPlots
 
 ProjDir = @__DIR__

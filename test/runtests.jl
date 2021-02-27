@@ -1,4 +1,4 @@
-using ModelComparisons, StanSample
+using StatsModelComparisons, StanSample
 using Test
 
 if haskey(ENV, "JULIA_CMDSTAN_HOME")

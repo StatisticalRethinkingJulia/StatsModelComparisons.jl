@@ -1,3 +1,3 @@
-# ModelComparisons
+# StatsModelComparisons
 
 *Documentation goes here.*

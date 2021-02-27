@@ -72,7 +72,7 @@ uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
-[[ModelComparisons]]
+[[StatsModelComparisons]]
 path = ".."
 uuid = "854dedd9-9477-4a25-907d-7fd989bfdd01"
 version = "0.1.0"
