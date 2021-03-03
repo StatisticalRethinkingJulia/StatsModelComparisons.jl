@@ -43,20 +43,23 @@ arXiv preprint arXiv:1507.02646.
 
 module StatsModelComparisons
 
-    using StatsFuns, Statistics
+using RecipesBase
+using StatsFuns
+using Statistics
 
-    mc_path = @__DIR__
+const mc_path = @__DIR__
 
-    include("psisloo.jl")
-    include("psislw.jl")
-    include("gpdfitnew.jl")
-    include("gpinv.jl")
-    include("waic.jl")
-    include("pk_utilities.jl")
-    include("dic.jl")
-    include("legacy.jl")
+include("psisloo.jl")
+include("psislw.jl")
+include("gpdfitnew.jl")
+include("gpinv.jl")
+include("waic.jl")
+include("pk_utilities.jl")
+include("dic.jl")
+include("legacy.jl")
 
-    export mc_path, deviance, dic, psisloo, gpdfitnew, gpinv
-    export waic, aic, bic
-
+export mc_path, deviance, dic, psisloo, gpdfitnew, gpinv
+export var2, waic, aic, bic
+export psislw
+export pk_qualify
 end

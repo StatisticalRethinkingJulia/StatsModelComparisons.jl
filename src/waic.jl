@@ -30,7 +30,3 @@ function waic( ll::AbstractArray; pointwise=false , log_lik="log_lik" , kwargs..
 
     (WAIC=waics, lppd=lpd, penalty=pD, std_err=se)
 end
-
-export
-    var2,
-    waic
