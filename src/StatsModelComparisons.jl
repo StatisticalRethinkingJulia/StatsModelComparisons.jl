@@ -1,6 +1,7 @@
-"""StatsModelComparisons
+"""
+    StatsModelComparisons
 
-This module implements several model comparison methods such as PSIS, WAIC and DIC..
+This module implements several model comparison methods such as PSIS, WAIC and DIC.
 
 Included functions
 ------------------
@@ -40,7 +41,6 @@ models. arXiv preprint arXiv:1507.04544.
 Aki Vehtari and Andrew Gelman (2015). Pareto smoothed importance sampling.
 arXiv preprint arXiv:1507.02646.
 """
-
 module StatsModelComparisons
 
 using RecipesBase
