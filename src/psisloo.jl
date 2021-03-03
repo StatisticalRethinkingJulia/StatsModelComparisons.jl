@@ -28,7 +28,6 @@ and the PSIS estimate is likely to have large variation and some bias.
 * `loo::Real`: sum of the leave-one-out log predictive densities.
 * `loos::AbstractArray`: Individual leave-one-out log predictive density terms.* `ks::AbstractArray`: Estimated Pareto tail indeces.
 """
-# Compute LOO and standard error
 function psisloo(log_lik::AbstractArray, wcpp::Int64=20, wtrunc::Float64=3/4)
    
     # log raw weights from log_lik
@@ -43,6 +42,3 @@ function psisloo(log_lik::AbstractArray, wcpp::Int64=20, wtrunc::Float64=3/4)
 
     return loo, loos, ks
 end
-
-export
-    psisloo

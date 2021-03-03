@@ -1,4 +1,3 @@
-
 var2(x) = mean(x.^2) .- mean(x)^2
 
 function waic( ll::AbstractArray; pointwise=false , log_lik="log_lik" , kwargs... )
@@ -30,7 +29,3 @@ function waic( ll::AbstractArray; pointwise=false , log_lik="log_lik" , kwargs..
 
     (WAIC=waics, lppd=lpd, penalty=pD, std_err=se)
 end
-
-export
-    var2,
-    waic

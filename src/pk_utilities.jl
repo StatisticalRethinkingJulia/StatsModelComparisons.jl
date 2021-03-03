@@ -1,5 +1,3 @@
-using StatsPlots
-
 function pk_qualify(pk::Vector{Float64})
     pk_good = sum(pk .<= 0.5)
     pk_ok = length(pk[pk .<= 0.7]) - pk_good
@@ -7,15 +5,42 @@ function pk_qualify(pk::Vector{Float64})
     (good=pk_good, ok=pk_ok, bad=pk_bad, very_bad=sum(pk .> 1))
 end
 
-function pk_plot(pk::Vector{Float64}; title="PSIS diagnostic plot.",
-    leg=:topleft, kwargs...)
-    scatter(pk, xlab="Datapoint", ylab="Pareto shape k",
-        marker=2.5, lab="Pk points", leg=leg)
-  hline!([0.5], lab="pk = 0.5");hline!([0.7], lab="pk = 0.7")
-  hline!([1], lab="pk = 1.0")
-  title!(title)
-end
+@userplot Pk_Plot
 
-export
-    pk_qualify,
-    pk_plot
+@recipe function f(p::Pk_Plot)
+    if length(p.args) != 1 || !(p.args[1] isa AbstractVector{<:Real})
+        error("PSIS diagnostic plots should be given one vector. Got: ", typeof(p.args))
+    end
+    pk = p.args[1]
+
+    # default plotting attributes
+    title --> "PSIS diagnostic plot"
+    legend --> :topleft
+    xguide --> "Datapoint"
+    yguide --> "Pareto shape k"
+
+    @series begin
+        seriestype := :scatter
+        marker --> 2.5
+        label := "Pk points"
+        pk
+    end
+
+    @series begin
+        seriestype := :hline
+        label := "pk = 0.5"
+        [0.5]
+    end
+
+    @series begin
+        seriestype := :hline
+        label := "pk = 0.7"
+        [0.7]
+    end
+
+    @series begin
+        seriestype := :hline
+        label := "pk = 1.0"
+        [1.0]
+    end
+end
