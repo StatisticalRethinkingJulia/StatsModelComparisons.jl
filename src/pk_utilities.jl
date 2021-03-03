@@ -15,7 +15,7 @@ end
 
     # default plotting attributes
     title --> "PSIS diagnostic plot"
-    legend --> :topright
+    legend --> :topleft
     xguide --> "Datapoint"
     yguide --> "Pareto shape k"
 
