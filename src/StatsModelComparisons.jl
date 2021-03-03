@@ -47,8 +47,6 @@ using RecipesBase
 using StatsFuns
 using Statistics
 
-const mc_path = @__DIR__
-
 include("psisloo.jl")
 include("psislw.jl")
 include("gpdfitnew.jl")
@@ -58,7 +56,7 @@ include("pk_utilities.jl")
 include("dic.jl")
 include("legacy.jl")
 
-export mc_path, deviance, dic, psisloo, gpdfitnew, gpinv
+export deviance, dic, psisloo, gpdfitnew, gpinv
 export var2, waic, aic, bic
 export psislw
 export pk_qualify
