@@ -1,4 +1,3 @@
-
 var2(x) = mean(x.^2) .- mean(x)^2
 
 function waic( ll::AbstractArray; pointwise=false , log_lik="log_lik" , kwargs... )
