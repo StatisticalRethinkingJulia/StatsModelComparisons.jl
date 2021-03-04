@@ -1,8 +1,12 @@
 Please note that parts of this package are derived from R's loo library and this is release under GPL (>= 3) license. Please see [loo](https://cran.r-project.org/web/packages/loo/index.html).
 
-In particular, see the note in psisloo.jl.
+The GPL 3 license is at least applicable to:
 
-The remaining parts of the StructuralCausalModels.jl package is licensed under the MIT "Expat" License:
+1. psisloo.jl and supporting fuctions
+
+Please see [ggm](https://cran.r-project.org/web/packages/loo/index.html) for further details.
+
+The remaining parts of the StatsModelComparisons.jl package are licensed under the MIT "Expat" License:
 
 > Copyright (c) 2021: Rob J Goedman.
 >
