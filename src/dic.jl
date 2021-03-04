@@ -1,16 +1,19 @@
 """
-    dic(loglike::AbstractVector{<:Real})
+    dic(loglik::AbstractVector{<:Real})
 
-Computes Deviance Information Criterion (DIC).
+Compute the Deviance Information Criterion (DIC).
 
 # Arguments
-* `loglike::AbstractArray`: A vector of posterior log likelihoods
+* `loglik::AbstractArray`: A vector of posterior log likelihoods
 
 # Returns
 * `dic::Real`: DIC value
+
+Note: DIC assumes that the posterior distribution is approx. multivariate
+Gaussian and tends to select overfitted models.
 """
-function dic(loglike::AbstractVector{<:Real})
-    D = map(deviance, loglike)
+function dic(loglik::AbstractVector{<:Real})
+    D = map(deviance, loglik)
     mean_D = mean(D)
     var_D = var(D; mean=mean_D)
     return mean_D + var_D / 2

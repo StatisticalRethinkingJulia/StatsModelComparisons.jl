@@ -1,3 +1,7 @@
+#
+# This example assumes below packages are available in your environment
+#
+
 using StatsModelComparisons
 using StanSample, StatsFuns, StatsPlots
 using JSON

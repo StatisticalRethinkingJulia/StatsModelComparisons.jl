@@ -12,14 +12,16 @@ This package implements model comparison methods as used and explained in Statis
 The most important methods are *Pareto smoothed importance sampling* (PSIS) and
 PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git). The Julia translation has been done by @alvaro1101 (on Github) in a (unpublished) package called [PSIS.jl](https://github.com/alvaro1101/PSIS.jl).
 
-Updates for Julia v1+, the new Pkg ecosystem and the addition of WAIC and pk utilities have been done by Rob J Goedman.
+Updates for Julia v1+, the new Pkg ecosystem and the addition of WAIC and pk utilities have been done by Rob J Goedman. DIC has been added by Chris Fisher. Major code improvements have been done by David Widmann. The status of the package remains experimental and is, as is StatisticalRethinking.jl, primarily intended for learning statistical modeling approaches and pitfalls.
 
 ### Installation
 
-Once registered, StatsModelComparisons.jl can be installed with:
+StatsModelComparisons.jl can be installed with:
 ```
 Pkg.add("StatsModelComparisons")
 ```
+
+Each example and notebook will expect additional packages to be installed in your environment. These are listed at the top of each example or notebook.
 
 Usually I have only a few packages `permanently` installed, e.g.:
 ```
@@ -93,7 +95,7 @@ Corresponding R code for the PSIS methods can be found in [R package called
 - Jin Zhang & Michael A. Stephens (2009) A New and Efficient
   Estimation Method for the Generalized Pareto Distribution,
   Technometrics, 51:3, 316-325, DOI: 10.1198/tech.2009.08017
-
+- Richard McElreath [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/)
 
 [CI-build]: https://github.com/StatisticalRethinkingJulia/StatsModelComparisons.jl/workflows/CI/badge.svg?branch=master
 

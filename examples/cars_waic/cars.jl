@@ -1,3 +1,7 @@
+#
+# This example assumes below packages are available in your environment
+#
+
 using StatsModelComparisons, StanSample
 using StatsFuns, RDatasets
 

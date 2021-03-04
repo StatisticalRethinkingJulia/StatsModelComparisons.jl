@@ -1,6 +1,10 @@
 ### A Pluto.jl notebook ###
 # v0.12.20
 
+#
+# This example assumes below packages are available in your environment
+#
+
 using Markdown
 using InteractiveUtils
 
