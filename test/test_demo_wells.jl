@@ -4,7 +4,7 @@ using StanSample, StatsFuns
 using Printf
 using JSON
 
-@testset "PSIS"  begin 
+@testset "Arsenic"  begin 
 
     ProjDir = @__DIR__
 
@@ -39,17 +39,10 @@ using JSON
         loo, loos, pk = psisloo(log_lik)
         elpd_loo = sum(loos)
         se_elpd_loo = std(loos) * sqrt(n)
-        @printf(">> elpd_loo = %.1f, SE(elpd_loo) = %.1f\n", elpd_loo, se_elpd_loo)
 
-        # Check the shape parameter k of the generalized Pareto distribution
-        if all(pk .< 0.5)
-            println("All Pareto k estimates OK (k < 0.5)")
-        else
-            pkn1 = sum((pk .>= 0.5) & (pk .< 1))
-            pkn2 = sum(pk .>= 1)
-            @printf(">> %d (%.0f%%) PSIS Pareto k estimates between 0.5 and 1\n", pkn1, pkn1/n*100)
-            @printf(">> %d (%.0f%%) PSIS Pareto k estimates greater than 1\n", pkn2, pkn2/n*100)
-        end
+        @test elpd_loo ≈ -1968.3 atol=2.0
+        @test se_elpd_loo ≈ 15.5 atol=0.5
+        @test all(pk .< 0.5)
     end
     println()
 
@@ -68,49 +61,17 @@ using JSON
         loo2, loos2, pk2 = psisloo(log_lik)
         elpd_loo = sum(loos2)
         se_elpd_loo = std(loos2) * sqrt(n)
-        @printf(">> elpd_loo = %.1f, SE(elpd_loo) = %.1f\n", elpd_loo, se_elpd_loo)
 
-        # Check the shape parameter k of the generalized Pareto distribution
-        if all(pk .< 0.5)
-            println("All Pareto k estimates OK (k < 0.5)")
-        else
-            pkn1 = sum((pk .>= 0.5) & (pk .< 1))
-            pkn2 = sum(pk .>= 1)
-            @printf(">> %d (%.0f%%) PSIS Pareto k estimates between 0.5 and 1\n", pkn1, pkn1/n*100)
-            @printf(">> %d (%.0f%%) PSIS Pareto k estimates greater than 1\n", pkn2, pkn2/n*100)
-        end
+        @test elpd_loo ≈ -1952.1 atol=2.0
+        @test se_elpd_loo ≈ 16.2 atol=0.5
+        @test all(pk .< 0.5)
     end
 
     if success(rc1) && success(rc2)
         ## Compare the models
         loodiff = loos - loos2
-        @printf("elpd_diff = %.1f, SE(elpd_diff) = %.1f\n",sum(loodiff), std(loodiff) * sqrt(n))
-    end
-    println()
-
-    ## k-fold-CV
-    # k-fold-CV should be used if several khats>0.5
-    # in this case it is not needed, but provided as an example
-
-    model_str = read(open(joinpath(ProjDir, "arsenic_logistic_t.stan")), String)
-    sm3 = SampleModel("arsenic_logistic_t", model_str);
-
-    cvitr, cvitst = cvit(n, 10, true)
-    kfcvs = similar(loos)
-    for cvi in 1:3
-        standatacv = (p = m, N = length(cvitr[cvi]), Nt = length(cvitst[cvi]),
-            x = x[cvitr[cvi],:], y = Int.(y[cvitr[cvi]]),
-            xt = x[cvitst[cvi],:], yt = Int.(y[cvitst[cvi]]))
-
-        # Fit the model in Stan
-        rc3 = stan_sample(sm3; data=standatacv)
-        if success(rc3)
-            nt3 = read_samples(sm3)
-            # Compute LOO and standard error
-            log_likt = nt3.log_likt'
-            local n_sam, n_obs = size(log_likt)
-            kfcvs[cvitst[cvi]] .=
-                reshape(logsumexp(log_likt .- log(n_sam), dims=1), n_obs)
-        end
+        
+        @test sum(loodiff) ≈ -16.3 atol=0.3
+        @test std(loodiff) * sqrt(n) ≈ 4.4 atol=0.2
     end
 end

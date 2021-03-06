@@ -14,6 +14,7 @@ StatsFuns = "0.9"
 julia = "1"
 
 [extras]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
@@ -22,4 +23,4 @@ StanSample = "c1514b29-d3a0-5178-b312-660c88baa699"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["JSON", "Printf", "Random", "StanSample", "Test"]
+test = ["CSV", "JSON", "Printf", "Random", "StanSample", "Test"]

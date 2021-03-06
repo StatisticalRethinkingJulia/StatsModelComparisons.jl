@@ -3,11 +3,10 @@
 #
 
 using StatsModelComparisons, StanSample
-using StatsFuns, RDatasets, CSV, Random
+using StatsFuns, CSV, Random
 
 ProjDir = @__DIR__
 
-#df = RDatasets.dataset("datasets", "cars")
 df = CSV.read(joinpath(ProjDir, "..", "..", "data", "cars.csv"), DataFrame)
 
 cars_stan = "
@@ -42,6 +41,7 @@ Random.seed!(1)
 cars_stan_model = SampleModel("cars.model", cars_stan)
 data = (N = size(df, 1), speed = df.Speed, dist = df.Dist)
 rc = stan_sample(cars_stan_model; data)
+println()
 
 if success(rc)
     #stan_summary(cars_stan_model, true)
@@ -51,7 +51,14 @@ end
 log_lik = nt_cars.log_lik'
 n_sam, n_obs = size(log_lik)
 lppd = reshape(logsumexp(log_lik .- log(n_sam); dims=1), n_obs)
-pwaic = [var(log_lik[:, i]) for i in 1:n_obs]
--2(sum(lppd) - sum(pwaic)) |> display
 
-waic(log_lik) |> display
+pwaic = [var(log_lik[:, i]) for i in 1:n_obs]
+@show -2(sum(lppd) - sum(pwaic))
+println()
+
+@show waic(log_lik)
+println()
+
+loo, loos, pk = psisloo(log_lik)
+@show -2loo
+
