@@ -1,11 +1,5 @@
 using StatsModelComparisons, StanSample
 using Test
 
-if haskey(ENV, "JULIA_CMDSTAN_HOME")
-
-    ProjDir = @__DIR__
-    include(joinpath(ProjDir, "test_demo_wells.jl"))
-
-else
-  println("\nJULIA_CMDSTAN_HOME not set. Skipping tests")
-end
+include("model_comparison_tests.jl")
+include("test_demo_wells.jl")

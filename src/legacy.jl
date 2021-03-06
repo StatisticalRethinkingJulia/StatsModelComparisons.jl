@@ -13,9 +13,9 @@ Computes the Akaike Information Criterion (AIC).
 aic(max_loglike, k) = 2 * (k - max_loglike)
 
 """
-    bic(max_loglike, k)
+    bic(max_loglike, k, n)
 
-Computes the Bayesian Information Criterion (AIC).
+Computes the Bayesian Information Criterion (BIC).
 
 # Arguments
 * `max_loglike`: the log likelihood evaluated at the maximum likelihood estimate
