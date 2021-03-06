@@ -10,7 +10,7 @@
 This package implements model comparison methods as used and explained in StatisticalRethinking (chapter 7). Thus, StatsModelComparisons.jl is part of the [StatisticalRethinking family of packages](https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl).
 
 The most important methods are *Pareto smoothed importance sampling* (PSIS) and
-PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git). The Julia translation has been done by @alvaro1101 (on Github) in a (unpublished) package called [PSIS.jl](https://github.com/alvaro1101/PSIS.jl).
+PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git). The Julia translation has been done by @alvaro1101 (on Github) in a (unpublished) package called [PSIS.jl](https://github.com/alvaro1101/PSIS.jl). The other important method for StatisticalRethinking is WAIC.
 
 Updates for Julia v1+, the new Pkg ecosystem and the addition of WAIC and pk utilities have been done by Rob J Goedman. DIC has been added by Chris Fisher. Major code improvements have been done by David Widmann. The status of the package remains experimental and is, as is StatisticalRethinking.jl, primarily intended for learning statistical modeling approaches and pitfalls.
 
