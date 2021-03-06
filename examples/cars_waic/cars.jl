@@ -3,9 +3,12 @@
 #
 
 using StatsModelComparisons, StanSample
-using StatsFuns, RDatasets
+using StatsFuns, RDatasets, CSV, Random
 
-df = RDatasets.dataset("datasets", "cars")
+ProjDir = @__DIR__
+
+#df = RDatasets.dataset("datasets", "cars")
+df = CSV.read(joinpath(ProjDir, "..", "..", "data", "cars.csv"), DataFrame)
 
 cars_stan = "
 data {
@@ -35,12 +38,13 @@ generated quantities {
 }
 "
 
+Random.seed!(1)
 cars_stan_model = SampleModel("cars.model", cars_stan)
 data = (N = size(df, 1), speed = df.Speed, dist = df.Dist)
 rc = stan_sample(cars_stan_model; data)
 
 if success(rc)
-    stan_summary(cars_stan_model, true)
+    #stan_summary(cars_stan_model, true)
     nt_cars = read_samples(cars_stan_model);
 end
 
