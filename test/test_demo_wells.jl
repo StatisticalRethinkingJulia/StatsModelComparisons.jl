@@ -6,6 +6,16 @@ using Test
 
 ProjDir = @__DIR__
 
+if haskey(ENV, "JULIA_CMDSTAN_HOME")
+
+    ProjDir = @__DIR__
+    include(joinpath(ProjDir, "test_demo_wells.jl"))
+
+else
+  println("\nJULIA_CMDSTAN_HOME not set. Skipping tests")
+end
+
+
 include(joinpath(ProjDir, "cvit.jl"))
 
 # Data
