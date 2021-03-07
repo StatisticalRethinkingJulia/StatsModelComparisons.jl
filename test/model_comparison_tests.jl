@@ -45,24 +45,6 @@ end
 
     cd(@__DIR__)
     Random.seed!(89905)
-    # df = RDatasets.dataset("datasets", "cars")
-
-    # stream = open("cars_model.stan", "r")
-    # cars_stan = read(stream, String)
-    # close(stream)
-
-    # cars_stan_model = SampleModel("cars.model", cars_stan)
-    # data = (N = size(df, 1), speed = df.Speed, dist = df.Dist)
-    # rc = stan_sample(cars_stan_model; data)
-
-    # stan_summary(cars_stan_model, true)
-    # nt_cars = read_samples(cars_stan_model);
-    # log_lik = nt_cars.log_lik'
-
-    # files = readdir("test_chains")
-    # files = map(f->"test_chains/"*f, files)
-    # samples = read_csv_files(files, 2000, :namedtuple; include_internals=false)
-    # df = vcat(dfs...)
 
     files = readdir("test_chains/")
 
