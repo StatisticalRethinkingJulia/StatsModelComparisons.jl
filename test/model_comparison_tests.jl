@@ -40,7 +40,7 @@ end
 @testset "WAIC and LOO" begin 
 
     using StatsModelComparisons, StanSample
-    using StatsFuns, RDatasets, Random, CSV
+    using StatsFuns, Random, CSV
     import StanSample: read_csv_files
 
     cd(@__DIR__)
