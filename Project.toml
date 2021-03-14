@@ -1,7 +1,7 @@
 name = "StatsModelComparisons"
 uuid = "854dedd9-9477-4a25-907d-7fd989bfdd01"
 authors = ["@alvaro1101, Rob J Goedman <goedman@icloud.com>, Chris Fisher"]
-version = "1.0.0"
+version = "1.0.1"
 
 [deps]
 RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
