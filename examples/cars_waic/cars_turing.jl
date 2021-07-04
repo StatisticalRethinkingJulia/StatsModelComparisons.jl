@@ -2,7 +2,7 @@ using Test
 using StatsModelComparisons, Turing
 using StatsFuns, CSV, Random, DataFrames, ParetoSmooth
 
-@testset "Cars Turing"  begin 
+#@testset "Cars Turing"  begin 
 
     ProjDir = @__DIR__
 
@@ -55,7 +55,7 @@ using StatsFuns, CSV, Random, DataFrames, ParetoSmooth
 
     Random.seed!(1)
     speed,dist = df.Speed, df.Dist
-    chain = sample(model(speed, dist), NUTS(1000, .65), MCMCThreads(), 1000, 3)
+    chain = sample(model(speed, dist), NUTS(1000, .65), MCMCThreads(), 1000, 4)
 
     data = map((s,d)->(s,d), speed, dist)
     # compute the pointwise log likelihoods where indices correspond to [data, sample, chain]
@@ -76,5 +76,5 @@ using StatsFuns, CSV, Random, DataFrames, ParetoSmooth
     # loo, loos, pk = psisloo(log_lik)
     # @test -2loo ≈ 421.0 atol=2.0
 
-end
+#end
 
