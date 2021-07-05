@@ -14,6 +14,8 @@ PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` b
 
 Updates for Julia v1+, the new Pkg ecosystem and the addition of WAIC and pk utilities have been done by Rob J Goedman. DIC has been added by Chris Fisher. Major code improvements have been done by David Widmann. The status of the package remains experimental and is, as is StatisticalRethinking.jl, primarily intended for learning statistical modeling approaches and pitfalls.
 
+A new package, ParetoSmooth.jl, is under development which will over time replace this package.
+
 ### Installation
 
 StatsModelComparisons.jl can be installed with:
