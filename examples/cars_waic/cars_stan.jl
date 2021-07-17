@@ -3,7 +3,8 @@
 #
 
 using StanSample, StatsModelComparisons, ParetoSmooth
-using StatsFuns, CSV, Random
+using StatsFuns, CSV
+using StatisticalRethinking: pk_plot
 
 ProjDir = @__DIR__
 
@@ -37,7 +38,7 @@ generated quantities {
 }
 "
 
-Random.seed!(1)
+#Random.seed!(1)
 cars_stan_model = SampleModel("cars.model", cars_stan)
 data = (N = size(df, 1), speed = df.Speed, dist = df.Dist)
 rc = stan_sample(cars_stan_model; data)
@@ -61,17 +62,39 @@ if success(rc)
     loo, loos, pk = psisloo(log_lik)
     @show -2loo
 
-    println("\nUsing new psis\n")
+    println("\nUsing ParetoSmooth' psis()\n")
 
     ll = reshape(nt_cars.log_lik, 50, 1000, 4);
-    psis_ll = psis(ll);
+    cars_loo = ParetoSmooth.loo(ll)
+    println()
+    cars_loo.estimates |> display
+    println()
+    cars_loo.pointwise |> display
+    println()
 
-    lwp = deepcopy(ll);
-    lwp += psis_ll.weights;
-    lwpt = Matrix(reshape(lwp, 50, 4000)');
-    loos = reshape(logsumexp(lwpt; dims=1), size(lwpt, 2));
+    if isdefined(Main, :StatisticalRethinking)
+        pk_plot(cars_loo.psis_object.pareto_k)
+        savefig(joinpath(ProjDir, "pareto_k_plot.png"))
+        pk_plot(pk)
+        savefig(joinpath(ProjDir, "pk_plot.png"))
+        closeall()
+    end
+end
 
-    @show loo = sum(loos)
-    @show 2loo
+if success(rc)
+    chn = read_samples(cars_stan_model; output_format=:mcmcchains);
+    log_lik2 = Matrix(Array(chn)[:, 54:end]');
+    ll2 = reshape(log_lik2, 50, 1000, 4);
 
+    cars_loo2 = ParetoSmooth.loo(ll2)
+    println()
+    cars_loo2.estimates |> display
+    println()
+    cars_loo2.pointwise |> display
+
+    if isdefined(Main, :StatisticalRethinking)
+        pk_plot(cars_loo2.psis_object.pareto_k)
+        savefig(joinpath(ProjDir, "pareto_k_plot_2.png"))
+        closeall()
+    end
 end

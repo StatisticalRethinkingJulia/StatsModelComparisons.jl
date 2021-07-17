@@ -3,7 +3,7 @@
 #
 
 using StanSample, StatsModelComparisons, ParetoSmooth
-using StatsFuns
+using CSV, StatsFuns
 
 # Just to access the data
 
@@ -46,9 +46,8 @@ data = (N = size(df, 1), y = df.pulled_left, prosoc = df.prosoc_left)
 rc11_4s = stan_sample(m11_4s; data)
 
 if success(rc11_4s)
-    st11_4s = read_samples(m11_4s; output_format=:table);
-
-    log_lik = matrix(st11_4s, "log_lik")
+    chn11_4s = read_samples(m11_4s; output_format=:mcmcchains);
+    log_lik = Matrix(Array(chn11_4s)[:, 507:end]);
     n_sam, n_obs = size(log_lik)
     lppd = reshape(logsumexp(log_lik .- log(n_sam); dims=1), n_obs)
 
@@ -62,7 +61,10 @@ if success(rc11_4s)
     loo, loos, pk = psisloo(log_lik)
     @show -2loo
 
+    println("\nUsing ParetoSmooth' psis()\n")
+
     ll = reshape(Matrix(log_lik'), 504, 1000, 4);
+
     cars_loo = ParetoSmooth.loo(ll)
     println()
     cars_loo.estimates |> display
@@ -76,5 +78,4 @@ if success(rc11_4s)
         savefig(joinpath(ProjDir, "pk_plot.png"))
         closeall()
     end
-
 end
