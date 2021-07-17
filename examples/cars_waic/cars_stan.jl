@@ -81,7 +81,7 @@ if success(rc)
     end
 end
 
-if success(rc)
+if success(rc) && isdefined(Main, :MCMCChains)
     chn = read_samples(cars_stan_model; output_format=:mcmcchains);
     log_lik2 = Matrix(Array(chn)[:, 54:end]');
     ll2 = reshape(log_lik2, 50, 1000, 4);
