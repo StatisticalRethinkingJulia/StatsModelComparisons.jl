@@ -4,7 +4,7 @@
 
 using StanSample, StatsModelComparisons, ParetoSmooth
 using StatsFuns, CSV
-using StatisticalRethinking: pk_plot
+#using StatisticalRethinking: pk_plot
 
 ProjDir = @__DIR__
 
