@@ -61,9 +61,11 @@ if success(rc11_4s)
 
     loo, loos, pk = psisloo(log_lik)
     @show -2loo
+    println()
 
     ll = reshape(Matrix(log_lik'), 504, 1000, 4);
     cars_loo = ParetoSmooth.loo(ll)
+    cars_loo |> display
     println()
     cars_loo.estimates |> display
     println()

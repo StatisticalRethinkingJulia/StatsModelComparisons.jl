@@ -5,6 +5,7 @@
 using StanSample, StatsModelComparisons, ParetoSmooth
 using StatsFuns, CSV
 #using StatisticalRethinking: pk_plot
+#using MCMCChains
 
 ProjDir = @__DIR__
 
@@ -66,6 +67,7 @@ if success(rc)
 
     ll = reshape(nt_cars.log_lik, 50, 1000, 4);
     cars_loo = ParetoSmooth.loo(ll)
+    cars_loo |> display
     println()
     cars_loo.estimates |> display
     println()
