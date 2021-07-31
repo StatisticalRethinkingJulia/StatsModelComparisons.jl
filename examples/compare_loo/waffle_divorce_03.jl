@@ -1,5 +1,7 @@
-using StanSample, ParetoSmooth
+using StanSample, ParetoSmooth, NamedTupleTools
 using StatisticalRethinking
+import StatisticalRethinking: pk_plot
+import ParetoSmooth: loo_compare
 
 df = CSV.read(sr_datadir("WaffleDivorce.csv"), DataFrame);
 scale!(df, [:Marriage, :MedianAgeMarriage, :Divorce])
@@ -80,7 +82,8 @@ parameters {
 }
 transformed parameters {
     vector[N] mu;
-    mu = a + + bA * A + bM * M;
+    for (i in 1:N)
+        mu[i] = a + bA * A[i] + bM * M[i];
 }
 model {
   a ~ normal( 0 , 0.2 );
@@ -96,42 +99,56 @@ generated quantities{
 }
 ";
 
+function loo_compare(models::Vector{SampleModel}; 
+    loglikelihood_name="log_lik", model_names=nothing, sort_models=true)
+
+    if isnothing(model_names)
+        mnames = [models[i].name for i in 1:length(models)]
+    end
+
+    nmodels = length(models)
+
+    ka = Vector{KeyedArray}(undef, nmodels)
+    ll = Vector{Array{Float64, 3}}(undef, nmodels)
+
+    for i in 1:length(models)
+        ka[i] = read_samples(models[i]; output_format=:keyedarray)
+        ll[i] = permutedims(Array(matrix(ka[i], loglikelihood_name)), [3, 1, 2])
+    end
+
+    loo_compare(ll; model_names=mnames, sort_models)
+end
+
 m5_1s = SampleModel("m5.1s", stan5_1)
 rc5_1s = stan_sample(m5_1s; data)
-if success(rc5_1s)
-    st5_1s = read_samples(m5_1s; output_format=:table)
-    log_lik = matrix(st5_1s, "log_lik")
-
-    ll = reshape(Matrix(log_lik'), 50, 1000, 4);
-    m5_1s_loo = ParetoSmooth.loo(ll)
-end
 
 m5_2s = SampleModel("m5.2s", stan5_2)
 rc5_2s = stan_sample(m5_2s; data)
-if success(rc5_2s)
-    st5_2s = read_samples(m5_2s; output_format=:table)
-    log_lik = matrix(st5_2s, "log_lik")
-
-    ll = reshape(Matrix(log_lik'), 50, 1000, 4);
-    m5_2s_loo = ParetoSmooth.loo(ll)
-end
 
 m5_3s = SampleModel("m5.3s", stan5_3)
 rc5_3s = stan_sample(m5_3s; data)
-if success(rc5_3s)
-    st5_3s = read_samples(m5_3s; output_format=:table)
-    log_lik = matrix(st5_3s, "log_lik")
-
-    ll = reshape(Matrix(log_lik'), 50, 1000, 4);
-    m5_3s_loo = ParetoSmooth.loo(ll)
-end
 
 if success(rc5_1s) && success(rc5_2s) && success(rc5_3s)
-    m5_1s_loo |> display
-    m5_3s_loo |> display
-    m5_2s_loo |> display
-end
 
+    nt5_1s = read_samples(m5_1s; output_format=:particles)
+    NamedTupleTools.select(nt5_1s, (:a, :bA, :sigma)) |> display
+    nt5_2s = read_samples(m5_2s; output_format=:particles)
+    NamedTupleTools.select(nt5_2s, (:a, :bM, :sigma)) |> display
+    nt5_3s = read_samples(m5_3s; output_format=:particles)
+    NamedTupleTools.select(nt5_3s, (:a, :bA, :bM, :sigma)) |> display
+
+    models = [m5_1s, m5_2s, m5_3s]
+    loglikelihood_name = :log_lik
+    loo_comparison = loo_compare(models)
+    println()
+    for (i, psis) in enumerate(loo_comparison.psis)
+        psis |> display
+        pk_plot(psis.pointwise(:pareto_k))
+        savefig(joinpath(@__DIR__, "m5.$(i)s.png"))
+    end
+    println()
+    loo_comparison |> display
+end
 #=
 With SR/ulam():
 ```
