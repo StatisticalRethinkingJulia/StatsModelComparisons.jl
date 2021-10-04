@@ -32,7 +32,7 @@ using JSON
     # Fit the model in Stan
     rc1 = stan_sample(sm1; data=data1)
     if success(rc1)
-        nt1 = read_samples(sm1)
+        nt1 = read_samples(sm1, :namedtuple)
 
         # Compute LOO and standard error
         log_lik = nt1.log_lik'
@@ -55,7 +55,7 @@ using JSON
     rc2 = stan_sample(sm1; data=data2)
 
     if success(rc2)
-        nt2 = read_samples(sm1)
+        nt2 = read_samples(sm1, :namedtuple)
         # Compute LOO and standard error
         log_lik = nt2.log_lik'
         loo2, loos2, pk2 = psisloo(log_lik)

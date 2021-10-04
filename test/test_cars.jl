@@ -42,7 +42,7 @@ using StatsFuns, CSV, Random
     rc = stan_sample(cars_stan_model; data)
 
     if success(rc)
-        nt_cars = read_samples(cars_stan_model);
+        nt_cars = read_samples(cars_stan_model, :namedtuple);
     end
 
     log_lik = nt_cars.log_lik'
